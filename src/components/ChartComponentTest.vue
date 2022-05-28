@@ -2,7 +2,9 @@
   <div>
     <pie-chart
       :data="pieData"
-      :series="[{ dataFields: { value: 'litres', category: 'country' } }]"
+      :series="[
+        {type: 'PieSeries' , dataFields: { value: 'litres', category: 'country' } }
+      ]"
       ref="pieChart"
     />
     <x-y-chart

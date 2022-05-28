@@ -1,22 +1,31 @@
-import App from '../App.vue';
-import HelloWorld from '../components/HelloWorld.vue';
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import HomeView from '../views/HomeView.vue';
 
-export const routes = [
+Vue.use(VueRouter);
+
+const routes = [
   {
     path: '/',
-    component: App,
-    children: [
-      { path: '', component: HelloWorld },
-      {
-        path: '/chart',
-        component: () => import('../components/HelloChart.vue'),
-      },
-      {
-        path: '/pie',
-        component: () => import('../components/ChartComponentTest.vue'),
-      },
-    ],
+    name: 'home',
+    component: HomeView,
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: () => import('../views/AboutView.vue'),
+  },
+  {
+    path: '/chart',
+    name: 'chart',
+    component: () => import('../components/ChartComponentTest.vue'),
   },
 ];
 
-export default routes;
+const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes,
+});
+
+export default router;

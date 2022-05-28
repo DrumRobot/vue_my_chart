@@ -2,8 +2,8 @@
   <div ref="chartdiv"></div>
 </template>
 <script>
-import am4core from '@amcharts/amcharts4/core';
-import am4charts from '@amcharts/amcharts4/charts';
+import * as am4core from '@amcharts/amcharts4/core';
+import * as am4charts from '@amcharts/amcharts4/charts';
 
 export default {
   name: 'BaseChart',
@@ -14,6 +14,7 @@ export default {
       required: true,
     },
     type: String,
+    config: Object,
   },
   watch: {
     data(data) {
@@ -21,7 +22,8 @@ export default {
     },
   },
   mounted() {
-    const { type, ...config } = this.$props;
+    let { config, type, ...props } = this.$props;
+    config = {...config, ...props}
     this.amChart = am4core.createFromConfig(
       config,
       this.$refs.chartdiv,
