@@ -2,14 +2,26 @@
   <x-y-chart
     :data="data"
     :paddingRight="20"
+    :scrollbarX="{
+      type: 'XYChartScrollbar',
+    }"
     :series="[
       {
         type: 'LineSeries',
         dataFields: { dateX: 'date', valueY: 'value' },
+        tooltipText: '{valueY.value}',
+      },
+    ]"
+    :xAxes="[{ type: 'DateAxis' }]"
+    :yAxes="[
+      {
+        type: 'ValueAxis',
+        renderer: { minWidth: 35 },
+        tooltip: { disabled: true },
       },
     ]"
     class="hello"
-    ref="baseChart"
+    ref="xyChart"
     type="XYChart"
   />
 </template>
@@ -43,25 +55,8 @@ export default {
   },
   mounted() {
     // 최초 한 번
-    let chart = this.$refs.baseChart.chart.amChart;
-
-    let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-    dateAxis.renderer.grid.template.location = 0;
-
-    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-    valueAxis.tooltip.disabled = true;
-    valueAxis.renderer.minWidth = 35;
-
-    let series = chart.series.push(new am4charts.LineSeries());
-    series.dataFields.dateX = 'date';
-    series.dataFields.valueY = 'value';
-
-    series.tooltipText = '{valueY.value}';
+    let chart = this.$refs.xyChart.chart;
     chart.cursor = new am4charts.XYCursor();
-
-    let scrollbarX = new am4charts.XYChartScrollbar();
-    scrollbarX.series.push(series);
-    chart.scrollbarX = scrollbarX;
   },
 };
 </script>

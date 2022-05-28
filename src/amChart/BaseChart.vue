@@ -9,10 +9,6 @@ export default {
   name: 'BaseChart',
   props: {
     data: Array,
-    series: {
-      type: Array,
-      required: true,
-    },
     type: String,
     config: Object,
   },
