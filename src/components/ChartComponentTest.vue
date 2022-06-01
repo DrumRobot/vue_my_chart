@@ -12,6 +12,14 @@
       :series="[
         { type: 'LineSeries', dataFields: { dateX: 'date', valueY: 'value' } },
       ]"
+      :xAxes="[{ type: 'DateAxis' }]"
+      :yAxes="[
+        {
+          type: 'ValueAxis',
+          renderer: { minWidth: 35 },
+          tooltip: { disabled: true },
+        },
+      ]"
       ref="xyChart"
     />
   </div>

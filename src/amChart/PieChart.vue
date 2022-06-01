@@ -1,5 +1,5 @@
 <template>
-  <base-chart :data="data" :series="series" ref="baseChart" type="PieChart" />
+  <base-chart :config="config" :data="data" ref="baseChart" type="PieChart" />
 </template>
 <script>
 import BaseChart from './BaseChart.vue';
@@ -13,6 +13,15 @@ export default {
       type: Array,
       required: true,
     },
+  },
+  data() {
+    return {
+      config: this.$props,
+    };
+  },
+  mounted() {
+    const chart = this.$refs.baseChart.amChart;
+    this.chart = chart;
   },
 };
 </script>
