@@ -34,10 +34,8 @@
   </div>
 </template>
 <script>
-// ParentData(Initial) - ParentCreate - ChildCreate(Binding) - ChildMounted - ParentMounted
-import PieChart from '../amChart/PieChart.vue';
-import SlicedChart from '@/amChart/SlicedChart.vue';
-import XYChart from '../amChart/XYChart.vue';
+import axios from 'axios';
+import { PieChart, SlicedChart, XYChart } from 'vue-amchart4';
 
 const createXYData = () => {
   let data = [];
