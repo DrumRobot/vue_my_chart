@@ -1,6 +1,6 @@
 <template>
   <base-chart
-    :config="config"
+    :config="this.$props"
     :data="data"
     ref="baseChart"
     type="XYChart"
@@ -22,11 +22,6 @@ export default {
     },
     xAxes: Array,
     yAxes: Array,
-  },
-  data() {
-    return {
-      config: this.$props,
-    };
   },
   mounted() {
     const chart = this.$refs.baseChart.amChart;

@@ -7,6 +7,15 @@
       ]"
       ref="pieChart"
     />
+    <sliced-chart
+      :data="slicedData"
+      :series="[
+        {
+          type: 'FunnelSeries',
+          dataFields: { value: 'value', category: 'name' },
+        },
+      ]"
+    />
     <x-y-chart
       :data="xyData"
       :series="[
@@ -27,6 +36,7 @@
 <script>
 // ParentData(Initial) - ParentCreate - ChildCreate(Binding) - ChildMounted - ParentMounted
 import PieChart from '../amChart/PieChart.vue';
+import SlicedChart from '@/amChart/SlicedChart.vue';
 import XYChart from '../amChart/XYChart.vue';
 
 const createXYData = () => {
@@ -83,23 +93,22 @@ const pieData = [
 ];
 
 export default {
-  components: { PieChart, XYChart },
+  components: { PieChart, XYChart, SlicedChart },
   name: 'ChartComponentTest',
   data() {
     console.log('Parent data initialize');
     return {
       pieData,
+      slicedData: [],
       xyData: createXYData(),
     };
   },
-  created() {
-    console.log('Parent created');
-  },
   mounted() {
-    console.log('Parent mounted');
-  },
-  updated() {
     console.log('Parent updated');
+    axios.get('http://localhost:8081/sliced_data.json').then((res) => {
+      this.slicedData = res.data;
+      console.log('axios then:', res.data);
+    });
   },
 };
 </script>
