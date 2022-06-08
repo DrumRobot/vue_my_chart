@@ -1,5 +1,6 @@
 <template>
   <x-y-chart
+    :cursor="{ type: 'XYCursor' }"
     :data="data"
     :paddingRight="20"
     :scrollbarX="{
@@ -12,7 +13,7 @@
         tooltipText: '{valueY.value}',
       },
     ]"
-    :xAxes="[{ type: 'DateAxis' }]"
+    :xAxes="[{ type: 'DateAxis', 'renderer.grid.template.location': 0 }]"
     :yAxes="[
       {
         type: 'ValueAxis',
@@ -22,15 +23,13 @@
     ]"
     class="hello"
     ref="xyChart"
-    type="XYChart"
   />
 </template>
 
 <script>
 import * as am4core from '@amcharts/amcharts4/core';
-import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_material from '@amcharts/amcharts4/themes/material';
-import XYChart from '../amChart/XYChart.vue';
+import { XYChart } from 'vue-amchart4';
 
 am4core.useTheme(am4themes_material);
 
@@ -52,11 +51,6 @@ export default {
     return {
       data,
     };
-  },
-  mounted() {
-    // 최초 한 번
-    let chart = this.$refs.xyChart.chart;
-    chart.cursor = new am4charts.XYCursor();
   },
 };
 </script>
